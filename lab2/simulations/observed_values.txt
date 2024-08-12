@@ -1,0 +1,7 @@
+cut-in voltage: 0.65 mV
+ideality factor: 1.92
+Reverse Recovery Times -->
+10KHz: 0.31 us
+100KHz: 0.31 us
+1MHz: 275 ns
+10Mhz: not defined (potential flips before it recovers)

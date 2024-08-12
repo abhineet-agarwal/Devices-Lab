@@ -1,0 +1,13 @@
+*RN142_IV
+.MODEL DRN142S D(IS=127.76E-12 N=1.7346 RS=.1581 IKF=.14089 
++ CJO=385.59E-15 M=.11823 VJ=.78827 ISR=139.38E-12 NR=3 BV=60 TT=275.00E-9)
+
+d1 1 2 DRN142S
+r1 2 0 100
+vin 1 0 dc
+.dc vin 0.01 5 0.01
+.control
+run
+plot ln(V(2)/100) vs V(1,2)
+.endc
+.end

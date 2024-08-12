@@ -1,0 +1,24 @@
+*RF_Switch
+* Diode Model
+.MODEL RN142S D(IS=127.76E-12 N=1.7346 RS=.1581 IKF=.14089 
++ CJO=385.59E-15 M=.11823 VJ=.78827 ISR=139.38E-12 NR=3 BV=60 TT=275.00E-9)
+
+V1 in 0 sin(0 6 10Meg)        
+C1 in 1 100n                  
+R1 1 0 500                    
+D1 2 1 RN142S   
+v0 2 3 0V             
+R2 3 bias 500                
+C2 3 out 100n                 
+R3 out 0 50               
+Vbias bias 0 5V
+
+.control
+tran 0.1n 200n
+    
+run
+        
+plot v(out)  
+plot i(v0) v(out)/50
+.endc
+.end
