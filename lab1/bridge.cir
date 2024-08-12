@@ -1,0 +1,15 @@
+*Bridge Rectifier
+.model d1 D()
+r1 2 3 1k
+d1 3 1 d1
+d2 1 2 d1
+d3 0 2 d1
+d4 3 0 d1
+
+vin 1 0 sin(0 12v 50 0 0)
+.tran 0.02ms 120ms
+.control
+run
+plot v(2) - v(3)
+.endc
+.end

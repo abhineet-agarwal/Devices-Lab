@@ -1,0 +1,12 @@
+*red_led
+.include E:/Devices_Lab/red_5mm.txt
+
+d1 1 2 RED 
+r1 2 0 100
+vin 1 0 dc
+.dc vin 0.01 5 0.01
+.control
+run
+plot ln(V(2)/100)
+.endc
+.end
