@@ -1,0 +1,21 @@
+Solar Cell I-V Charecteristics
+.include solar_cell.txt
+r1 3 0 100
+X1 1 2 solar_cell
+VMES 2 3 dc 0
+vdc 1 0 dc 0
+.dc vdc -2 2 0.01
+.control
+run
+let power = (-I(VMES)*V(1,2))
+plot i(VMES) vs V(1,2)
+*plot (v(2)/100) vs v(1)-v(2)
+plot power vs V(1,2) 
+plot power vs I(VMES)
+
+meas dc max_power max power
+meas dc Vm find V(1,2) when deriv(power) = 0
+meas dc Im find I(VMES) when deriv(power) = 0
+
+.endc
+.end

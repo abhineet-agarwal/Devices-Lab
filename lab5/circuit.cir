@@ -1,0 +1,24 @@
+* Solar Cell I-V Characteristics with Temperature Sweep
+.include solar_cell.txt
+
+* Define the resistance and solar cell
+r1 3 0 100
+X1 1 2 solar_cell
+VMES 2 3 dc 0
+vdc 1 0 dc 0
+
+* Temperature sweep
+.control
+* List of temperatures (35°C, 45°C, 55°C, 65°C, 75°C)
+foreach temp (308.15 318.15 328.15 338.15 348.15)
+    temp $temp ; Set temperature
+    dc vdc -2 2 0.01
+    let power = (-I(VMES)*V(1,2))
+    wrdata Illumination_$temp v(1,2) i(VMES) power
+    plot i(VMES) vs V(1,2)
+    plot power vs V(1,2)
+    plot power vs I(VMES)
+end
+.endc
+
+.end

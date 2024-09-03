@@ -1,0 +1,25 @@
+1. 
+Vin for Si = 0.13V
+Vin for Ge = 0.57V
+Lower cut in voltage for Ge because of lower bandgap.
+
+2. eta for different regions
+Recombination (0-2V) = 1.4
+Ideal (0.3V - 0.5V) = 1.1
+High Injection (0.6V - 0.8V) = 2.07
+
+Saturation at higher voltages due to series resistance (no-ideality) along with the diode. This resistance causes maximum voltage drop as current increases, voltage drop across diode increases.
+
+3. T vs Vin
+250K 0.671V
+275K 0.615V
+300K 0.537V
+325K 0.498V
+350K 0.439V
+375K 0.381V
+400K 0.322V
+
+I_sat is directly proportional to T^3. Therefore, with temperature the saturation current increases, and lower voltage is required for same current.
+
+
+
