@@ -1,0 +1,43 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+# Data from the table
+frequency = np.array([1e3, 5e3, 10e3, 50e3, 100e3, 150e3, 200e3, 250e3, 300e3, 
+                      350e3, 400e3, 450e3, 500e3, 550e3, 600e3, 650e3, 700e3, 750e3, 800e3, 850e3, 900e3])  # Frequency in Hz
+V_out = np.array([1.76, 1.84, 2.20, 4.64, 5.28, 5.44, 5.36, 5.36, 5.20, 5.04, 
+                  4.80, 4.64, 4.40, 4.16, 4.00, 3.76, 3.60, 3.44, 3.28, 3.12, 2.96])  # V_out in V
+
+# Define a first-order low-pass filter model
+def model(f, V_max, fc):
+    return V_max / np.sqrt(1 + (f / fc)**2)
+
+# Initial guess for the parameters
+initial_guess = [max(V_out), 1e5]  # V_max, fc
+
+# Fit the model to the data
+params, covariance = curve_fit(model, frequency, V_out, p0=initial_guess)
+V_max_fit, fc_fit = params
+
+# Calculate the gain at the cutoff frequency
+cutoff_level = V_max_fit / np.sqrt(2)
+
+# Plotting the frequency response and the fitted curve
+plt.figure(figsize=(10, 6))
+plt.plot(frequency, V_out, marker='o', linestyle='-', color='b', label='Data')
+plt.plot(frequency, model(frequency, *params), color='r', label='Fitted Curve')
+plt.xscale('log')  # Logarithmic scale for frequency
+plt.xlabel('Frequency (Hz)', fontsize=14)
+plt.ylabel('$V_{out}$ (pk-pk) (V)', fontsize=14)
+plt.title('Frequency Response with Curve Fitting', fontsize=16)
+plt.grid(True)
+plt.axhline(y=cutoff_level, color='g', linestyle='--', label='3dB Cutoff Level')
+plt.legend()
+
+# Display the plot
+plt.tight_layout()
+plt.show()
+
+# Output the cutoff frequency
+cutoff_freq_khz = fc_fit / 1e3  # Convert Hz to kHz
+print(f'The fitted 3dB cutoff frequency is approximately {cutoff_freq_khz:.2f} kHz.')
